@@ -8,7 +8,6 @@ function addText() {
   Action.addText(elTextCanvas, elCanvasBlock);
 }
 
-
 // Get images
 function getImages() {
   Media.getImages("/images")
@@ -16,6 +15,22 @@ function getImages() {
       var elParent = document.getElementById('listImage');
       var elChild = document.createElement('div');
       Media.getImagesSuccessful(response, elChild, elParent);
+    }, function(error) {
+      alert(error);
+    });
+}
+
+// Upload image
+function startUploading() {
+  var imgFile = document.getElementById('image_file').files[0];
+  var data = new FormData(imgFile);
+  data.append('file', data);
+
+  Media.uploadImage('/uploads', data)
+    .then(function(response) {
+      var elParent = document.getElementById('listImage');
+      var elChild = document.createElement('div');
+      Media.uploadSuccessful(response, elChild, elParent);
     }, function(error) {
       alert(error);
     });
