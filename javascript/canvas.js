@@ -20,3 +20,17 @@ function getImages() {
       alert(error);
     });
 }
+
+// Drag image to block
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  Action.dragTag(ev, 'draimg');
+}
+
+// Drop img tag
+function drop(ev) {
+  Action.dropTag(ev, 'draimg', 'img');
+}
