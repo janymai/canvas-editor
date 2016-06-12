@@ -49,3 +49,51 @@ function drag(ev) {
 function drop(ev) {
   Action.dropTag(ev, 'draimg', 'img');
 }
+
+// Move element
+
+// Object of the element to be moved
+item = null;
+
+// Stores x & y coordinates of the mouse pointer
+mouseX = 0;
+mouseY = 0;
+
+// stores top, left of the element
+elementX = 0;
+elementY = 0;
+
+// The moveInit function
+function moveInit(){
+  document.onmousemove = move;
+  document.onmouseup = stop;
+}
+
+//destroy the object when we are done
+function stop(){
+  item = null;
+}
+
+// Moving the element
+function move(ev){
+  var blockCanvas = document.getElementById('blockCanvas');
+  Action.getOffset(blockCanvas);
+
+  mouseX = document.all ? window.event.clientX : ev.pageX;
+  mouseY = document.all ? window.event.clientY : ev.pageY;
+  limitX = mouseX > blockLeft && mouseX < maxOffsetX,
+  limitY = mouseY > blockTop && mouseY < maxOffsetY;
+
+  if(item != null && limitX  && limitY) {
+    item.style.left = (mouseX - elementX) + "px";
+    item.style.top = (mouseY - elementY) + "px";
+  }
+}
+
+// When use starts move the element will trigger
+// Store the object of the element which needs to be moved
+function moveItem(element){
+  item = element;
+  elementX = mouseX - item.offsetLeft;
+  elementY = mouseY - item.offsetTop;
+}
