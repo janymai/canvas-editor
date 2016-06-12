@@ -28,5 +28,31 @@ var Media = {
     }
     elChild.innerHTML = listImage;
     elParent.appendChild(elChild);
+  },
+
+  uploadImage: function(url, data){
+    return new Promise(function(succeed, fail) {
+      var req = new XMLHttpRequest();
+      req.open("POST", url, true);
+      req.addEventListener("load", function() {
+       if (req.status < 400)
+         succeed(req.response);
+       else
+         fail(new Error(req.statusText));
+      });
+      req.addEventListener("error", function() {
+       fail(new Error("Network error"));
+      });
+      req.setRequestHeader("Content-Type", "multipart/form-data");
+      req.send(data);
+    });
+  },
+
+  uploadSuccessful: function(response, elChild, elParent) {
+    var d = new Date(),
+        listImage = '';
+    imageHTML = "<img id='drag"+ d.getTime() +"' src='" + response + "'class='img-rounded ele' style='z-index: 5;' onmousedown=''/></li>";
+    elChild.innerHTML = imageHTML;
+    elParent.appendChild(elChild);
   }
 }
