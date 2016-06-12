@@ -36,5 +36,15 @@ var Action = {
       childTargetTag.setAttribute("draggable", "false");
       childTargetTag.setAttribute("onmousedown", "moveItem(this);");
     }
+  },
+
+  // Get offset element
+  getOffset: function(element) {
+    var blockHeight = element.offsetHeight,
+        blockWidth = element.offsetWidth,
+        blockTop = element.offsetTop,
+        blockLeft = element.offsetLeft,
+        maxOffsetX = blockLeft + blockWidth,
+        maxOffsetY = blockHeight + blockTop;
   }
 }
