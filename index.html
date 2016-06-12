@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="javascript/module/service.js"></script>
+    <script src="javascript/module/behavior.js"></script>
+    <script src="javascript/canvas.js"></script>
+    <style type="text/css">
+      .ele {
+        background: #e7e7e7;
+        cursor: move;
+        width: 200px;
+        position: relative;
+        margin: 10px;
+        padding: 20px;
+        float: left;
+      }
+      img.ele {
+        background: transparent;
+        width: 50px;
+        height: 50px;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+  <!-- side pane -->
+  <div class="sidepane col-sm-2 col-md-2 col-lg-2">
+    <div class="form">
+      <h3>Form</h3>
+      <input type="file" name="image_file" accept=".png, .jpeg" id="image_file" />
+      <button id="uploadImage" class="btn btn-default" onclick="startUploading()">Upload</button>
+      <!-- Upload Form here -->
+    </div>
+    <hr />
+    <div class="assets">
+      <h3>Assets</h3>
+      <div class="text">
+          <h4>Text</h4>
+          <button id="addText" class="btn btn-default" onclick="addText()">Add Text</button>
+          <textarea class="hide" rows="4" cols="50" placeholder="Add text here" id="textCanvas"></textarea>
+      </div>
+      <div class="image">
+          <h4>Images</h4>
+          <div id="listImage">
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- canvas -->
+  <div class="canvas col-sm-8 col-md-8 col-lg-8">
+      <div class="block" id="blockCanvas" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <!-- Add images and texts to here -->
+      </div>
+  </div>
+
+  </body>
+</html>
