@@ -1,4 +1,12 @@
+'use strict';
+
+window.onload = function() {
+  moveInit();
+}
+
+// Get image to drag
 getImages();
+
 
 // Add text
 function addText() {
@@ -20,6 +28,20 @@ function getImages() {
     });
 }
 
+// Drag image to block
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  Action.dragTag(ev, 'draimg');
+}
+
+// Drop img tag
+function drop(ev) {
+  Action.dropTag(ev, 'draimg', 'img');
+}
+
 // Upload image
 function startUploading() {
   var imgFile = document.getElementById('image_file').files[0];
@@ -36,21 +58,7 @@ function startUploading() {
     });
 }
 
-// Drag image to block
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-function drag(ev) {
-  Action.dragTag(ev, 'draimg');
-}
-
-// Drop img tag
-function drop(ev) {
-  Action.dropTag(ev, 'draimg', 'img');
-}
-
-// Move element
+// Move the element
 
 // Object of the element to be moved
 item = null;
@@ -77,7 +85,12 @@ function stop(){
 // Moving the element
 function move(ev){
   var blockCanvas = document.getElementById('blockCanvas');
-  Action.getOffset(blockCanvas);
+  var blockHeight = blockCanvas.offsetHeight,
+      blockWidth = blockCanvas.offsetWidth,
+      blockTop = blockCanvas.offsetTop,
+      blockLeft = blockCanvas.offsetLeft,
+      maxOffsetX = blockLeft + blockWidth,
+      maxOffsetY = blockHeight + blockTop;
 
   mouseX = document.all ? window.event.clientX : ev.pageX;
   mouseY = document.all ? window.event.clientY : ev.pageY;
